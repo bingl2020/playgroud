@@ -1,11 +1,16 @@
 package oa;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class FindKClosestElements {
 
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        Set<String> set = new HashSet<>();
+
+        Map<String, Integer> map = new HashMap<>();
+        for (String word : "  ".toLowerCase().replaceAll("", " ").split("\\s+")) {
+
+        }
         List<Integer> res = new ArrayList<>();
         if (k <= 0) {
             return res;

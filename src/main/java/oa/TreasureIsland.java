@@ -49,6 +49,7 @@ public class TreasureIsland {
     }
 
     public static void main(String[] args) {
+
         char[][] island = new char[][]{
                 {'O', 'O', 'O', 'O'},
                 {'D', 'O', 'D', 'O'},
