@@ -4,6 +4,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Knapsack01 {
+
+    public int bottomUpDP2(int val[], int wt[], int W){
+        int[][] dp = new int[val.length + 1][W + 1];
+
+        for (int i = 0; i < dp.length; i ++) {
+            for (int w = 0; w <= W; w++ ) {
+                if (i == 0 || w == 0) {
+                  //  dp[i][w] = 0;
+                    continue;
+                }
+                if (w - wt[i-1] >= 0) {
+                    dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - wt[i - 1]] + wt[i - 1]);
+                } else {
+                    dp[i][w] = dp[i - 1][w];
+                }
+            }
+        }
+
+        return dp[val.length][W];
+    }
+
     /**
      * Solves 0/1 knapsack in bottom up dynamic programming
      */
@@ -31,25 +52,6 @@ public class Knapsack01 {
     class Index {
         int remainingWeight;
         int remainingItems;
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Index index = (Index) o;
-
-            if (remainingWeight != index.remainingWeight) return false;
-            return remainingItems == index.remainingItems;
-
-        }
-
-        @Override
-        public int hashCode() {
-            int result = remainingWeight;
-            result = 31 * result + remainingItems;
-            return result;
-        }
     }
 
     /**
@@ -94,16 +96,13 @@ public class Knapsack01 {
 
     public static void main(String args[]){
 
-        String text = "🆕";
-        text = text.replaceAll("[^\\u0000-\\uFFFF]", "");
-
-
-
         Knapsack01 k = new Knapsack01();
         int val[] = {22, 20, 15, 30, 24, 54, 21, 32, 18, 25};
         int wt[] = {4, 2, 3, 5, 5, 6, 9, 7, 8, 10};
         int r = k.bottomUpDP(val, wt, 30);
         int r1 = k.topDownRecursive(val, wt, 30);
+
+        int r3 = k.bottomUpDP2(val, wt, 30);
         System.out.println(r);
         System.out.println(r1);
     }

@@ -1,4 +1,4 @@
-package adj;
+package Graph;
 
 import java.util.*;
 
@@ -19,12 +19,35 @@ Solution: shortest path
  */
 public class NetworkDelayTimes {
 
+    // relax all edge a =gain, if we stil get lesser distance -> negative weight cycle
+    public int networkDelayTime_Bellman_Ford(int[][] times, int N, int K) {
+        int[] dist = new int[N + 1];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[K] = 0;
+        for (int i = 1; i < N; i++) {
+            for (int[] edge : times) {
+                if (dist[edge[0]] != Integer.MAX_VALUE ) {
+                    dist[edge[1]] = Math.min(dist[edge[1]], dist[edge[0]] + edge[2]);
+                }
+            }
+        }
+
+        int res = 0;
+        for (int i = 1; i <= N; i++) {
+            res = Math.max(res, dist[i]);
+        }
+
+        return res == Integer.MAX_VALUE ? -1 : res;
+    }
+
+    // negative weight cycle, check values on diagonal of distance matrix if negative
+    // check for every pair of vertices, do we get a shorter distance by going thru k
     public int networkDelayTime_Floyd_Warshall(int[][] times, int N, int K) {
         int[][] dist = new int[N + 1][N + 1];
         // initialization
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= N; j++) {
-                dist[i][j] = i == j? 0 : Integer.MAX_VALUE;
+                dist[i][j] = i == j ? 0 : Integer.MAX_VALUE;
             }
         }
         for (int[] edge : times) {
@@ -32,8 +55,8 @@ public class NetworkDelayTimes {
         }
         // calculate all pairs shortest path
         for (int k = 1; k <= N; k++) {
-            for (int i = 1; i <=N; i++) {
-                for (int j = 1; j <=N; j++) {
+            for (int i = 1; i <= N; i++) {
+                for (int j = 1; j <= N; j++) {
                     if (dist[i][k] != Integer.MAX_VALUE && dist[k][j] != Integer.MAX_VALUE) {
                         dist[i][j] = Math.min(dist[i][j], dist[i][k] + dist[k][j]);
                     }
