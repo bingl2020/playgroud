@@ -1,8 +1,7 @@
-package oa;
+package Graph.MST;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.PriorityQueue;
 import java.util.Set;
 
 /*
@@ -21,7 +20,7 @@ We should use Prim when the graph is dense, i.e number of edges is high ,like E=
 public class MinCostToConnectAllNodes_Kruskal {
     int[] parent;
     int component;
-    public int getRepairCost(int n, int[][] edges, int[][] repairEdges) {
+    public int getRepairCost_kruskal(int n, int[][] edges, int[][] repairEdges) {
         component = n;
         parent = new int[n + 1];
         for(int i = 0; i < n + 1; i++) parent[i] = i;
@@ -37,7 +36,6 @@ public class MinCostToConnectAllNodes_Kruskal {
             int[] e = new int[]{edge[0], edge[1]};
             int hash = Arrays.hashCode(e);
             if(set.contains(hash)) {
-                int i = 0;
                 continue;
             }
             if(find(edge[0]) != find(edge[1])) {
@@ -75,13 +73,22 @@ public class MinCostToConnectAllNodes_Kruskal {
                 cost += edge[2];
                 component --;
             }
+            if (component == 1) {
+                return cost;
+            }
         }
-        return component == 1 ? cost : -1;
+        return -1;
     }
 
     private int find(int x) {
-        if(parent[x] != x) parent[x] = find(parent[x]);
-        return parent[x];
+
+        if (parent[x] == x) {
+            return x;
+        }
+        return parent[x] = find(parent[x]);
+//        if(parent[x] != x)
+//            parent[x] = find(parent[x]);
+//        return parent[x];
      }
 
     private void union(int x, int y) {
@@ -103,7 +110,7 @@ public class MinCostToConnectAllNodes_Kruskal {
 
     private static void test(int n, int[][] edges, int[][] newEdges, boolean isRepair) {
         if(isRepair) {
-            int cost = new MinCostToConnectAllNodes_Kruskal().getRepairCost(n, edges, newEdges);
+            int cost = new MinCostToConnectAllNodes_Kruskal().getRepairCost_kruskal(n, edges, newEdges);
             System.out.println("Min repair cost: " + cost);
         } else {
             int cost = new MinCostToConnectAllNodes_Kruskal().getCost(n, edges, newEdges);

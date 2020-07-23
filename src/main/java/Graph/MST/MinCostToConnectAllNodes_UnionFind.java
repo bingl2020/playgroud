@@ -1,4 +1,4 @@
-package oa;
+package Graph.MST;
 
 import java.util.Arrays;
 

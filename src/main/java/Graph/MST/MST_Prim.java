@@ -1,17 +1,14 @@
-package oa;
+package Graph.MST;
+// A Java program for Prim's Minimum Spanning Tree (MST) algorithm.
+// The program is for adjacency matrix representation of the graph
 
-public class MininumSprinningTreePrimsAndKruskals {
-
-    // prim's (greedy)
-    // find minum spanning tree inclues every vertex, where the total weight of the tree is the minimized.
-    // operates by build the MST on vertex at a time, from a arbitrary starting vertex,
-    // at each step adding the cheapest possible connection from the tree to another vertex.
+class MST_Prim {
+    // Number of vertices in the graph
     private static final int V = 5;
 
     // A utility function to find the vertex with minimum key
     // value, from the set of vertices not yet included in MST
-    int minKey(int key[], boolean mstSet[])
-    {
+    int minKey(int key[], Boolean mstSet[]) {
         // Initialize min value
         int min = Integer.MAX_VALUE, min_index = -1;
 
@@ -26,35 +23,28 @@ public class MininumSprinningTreePrimsAndKruskals {
 
     // A utility function to print the constructed MST stored in
     // parent[]
-    void printMST(int parent[], int graph[][])
-    {
+    void printMST(int parent[], int graph[][]) {
         System.out.println("Edge \tWeight");
-        int cost = 0;
-        for (int i = 1; i < V; i++) {
+        for (int i = 1; i < V; i++)
             System.out.println(parent[i] + " - " + i + "\t" + graph[i][parent[i]]);
-            cost += graph[i][parent[i]];
-        }
-
-        System.out.println("MST : " + cost);
     }
 
     // Function to construct and print MST for a graph represented
     // using adjacency matrix representation
-    void primMST(int graph[][])
-    {
+    void primMST(int graph[][]) {
         // Array to store constructed MST
-        int V = graph.length;
         int parent[] = new int[V];
 
         // Key values used to pick minimum weight edge in cut
         int key[] = new int[V];
 
         // To represent set of vertices included in MST
-        boolean mstSet[] = new boolean[V];
+        Boolean mstSet[] = new Boolean[V];
 
         // Initialize all keys as INFINITE
         for (int i = 0; i < V; i++) {
             key[i] = Integer.MAX_VALUE;
+            mstSet[i] = false;
         }
 
         // Always include first 1st vertex in MST.
@@ -89,40 +79,25 @@ public class MininumSprinningTreePrimsAndKruskals {
         printMST(parent, graph);
     }
 
-    public static void main(String[] args)
-    {
-        /* Let us create the following graph
-        2 3
-        (0)--(1)--(2)
-        | / \ |
-        6| 8/ \5 |7
-        | /     \ |
-        (3)-------(4)
-            9         */
-        MininumSprinningTreePrimsAndKruskals t = new MininumSprinningTreePrimsAndKruskals();
-        int graph[][] = new int[][] { { 0, 2, 0, 6, 0 },
-                                    { 2, 0, 3, 8, 5 },
-                                    { 0, 3, 0, 0, 7 },
-                                    { 6, 8, 0, 0, 9 },
-                                    { 0, 5, 7, 9, 0 } };
+    public static void main(String[] args) {
+		/* Let us create the following graph
+		2 3
+		(0)--(1)--(2)
+		| / \ |
+		6| 8/ \5 |7
+		| /	 \ |
+		(3)-------(4)
+			9		 */
+        MST_Prim t = new MST_Prim();
+        int graph[][] = new int[][]{
+                {0, 2, 0, 6, 0},
+                {2, 0, 3, 8, 5},
+                {0, 3, 0, 0, 7},
+                {6, 8, 0, 0, 9},
+                {0, 5, 7, 9, 0}};
 
         // Print the solution
         t.primMST(graph);
-
-        int[][] graph2 = new int[][] {{0, 1, 2, 3, 4},
-                                        {1, 0, 5, 0, 7},
-                                        {2, 5, 0, 6, 0},
-                                        {3, 0, 6, 0, 0},
-                                        {4, 7, 0, 0, 0}};
-        t.primMST(graph2);
-
-        int[][] graph3 = new int[][]    {{0, 1, 1, 100, 0, 0},
-                                        {1, 0, 1, 0, 0, 0},
-                                        {1, 1, 0, 0, 0, 0},
-                                        {100, 0, 0, 0, 2, 2},
-                                        {0, 0, 0, 2, 0, 2},
-                                        {0, 0, 0, 2, 2, 0}};
-        t.primMST(graph3);
-
     }
 }
+// This code is contributed by Aakash Hasija
