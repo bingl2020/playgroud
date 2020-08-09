@@ -12,6 +12,15 @@ v = 1 2 5
 10 - 2 -> 8 - 5 -> 3 -1 -> 2 - 2 -> result
 
 c(S, V) = c(i, j-1)
+                            10
+                   9, 1             10, 2
+              8, 1     9, 2      8, 2   10, 5
+         7, 1   8, 2
+
+    1   2   3   4   5
+1   1   1   1   1   1
+2   1   2   2  1+
+5
 
  */
 public class CoinChangeNumberOfWaysProblem {

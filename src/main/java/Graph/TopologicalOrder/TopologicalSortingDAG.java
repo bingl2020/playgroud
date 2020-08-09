@@ -1,4 +1,4 @@
-package Graph.TopologicalOrder.DAG;
+package Graph.TopologicalOrder;
 
 /*
 Topological sorting/order is a linear ordering of its vertices such that for every directed edge uv, u comes before v in the ordering.

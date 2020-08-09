@@ -1,4 +1,4 @@
-package Graph.TopologicalOrder.DAG;
+package Graph.TopologicalOrder;
 
 import java.util.*;
 

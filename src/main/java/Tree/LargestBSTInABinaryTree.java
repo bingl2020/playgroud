@@ -5,31 +5,35 @@ public class LargestBSTInABinaryTree {
     class ResultType {
         Integer max, min, size;
         boolean isBST;
+        Node node;
 
-        ResultType(boolean isBST, Integer min, Integer max, Integer size) {
+        ResultType(boolean isBST, Integer min, Integer max, Integer size, Node node) {
             this.isBST = isBST;
             this.min = min;
             this.max = max;
             this.size = size;
+            this.node = node;
         }
     }
 
     public int findTheSizeOfLargetBST_bottomUp(Node root) {
-        return findLargetBST(root).size;
+        ResultType res = findLargetBST(root);
+
+        return res.size;
     }
 
     private ResultType findLargetBST(Node root) {
         if (root == null) {
-            return new ResultType(true, Integer.MAX_VALUE, Integer.MIN_VALUE, 0);
+            return new ResultType(true, Integer.MAX_VALUE, Integer.MIN_VALUE, 0, null);
         }
 
         ResultType left = findLargetBST(root.left);
         ResultType right = findLargetBST(root.right);
 
         if (left.isBST && right.isBST && root.key > left.max && root.key < right.min) {
-            return new ResultType(true, Math.min(left.min, root.key), Math.max(root.key, right.max), left.size + right.size + 1);
+            return new ResultType(true, Math.min(left.min, root.key), Math.max(root.key, right.max), left.size + right.size + 1, root);
         } else {
-            return new ResultType(false, 0, 0, Math.max(left.size, right.size));
+            return new ResultType(false, 0, 0, Math.max(left.size, right.size), left.size > right.size ? left.node : right.node);
         }
 
     }

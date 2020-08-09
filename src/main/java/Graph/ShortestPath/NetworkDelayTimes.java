@@ -1,14 +1,16 @@
-package Graph;
+package Graph.ShortestPath;
 
 import java.util.*;
 
 /*
 There are N network nodes, labelled 1 to N.
 
-Given times, a list of travel times as directed edges times[i] = (u, v, w), where u is the source node, v is the target node, and w is the time it takes for a signal to travel from source to target.
+Given times, a list of travel times as directed edges times[i] = (u, v, w), where u is the source node, v is the target node,
+and w is the time it takes for a signal to travel from source to target.
 
 Now, we send a signal from a certain node K. How long will it take for all nodes to receive the signal? If it is impossible, return -1.
 
+single source
 Solution: shortest path
 1. Dijkstra's T O(n^2)  -> O(NlogN + E)     Space O(N + E)      not support negative     single source shortest path
 2. Bellman-Ford         T O(NE) -> o        Space O(N)          dense not good
@@ -19,7 +21,7 @@ Solution: shortest path
  */
 public class NetworkDelayTimes {
 
-    // relax all edge a =gain, if we stil get lesser distance -> negative weight cycle
+    // relax all edge again and again , if we stil get lesser distance -> negative weight cycle
     public int networkDelayTime_Bellman_Ford(int[][] times, int N, int K) {
         int[] dist = new int[N + 1];
         Arrays.fill(dist, Integer.MAX_VALUE);
@@ -27,7 +29,7 @@ public class NetworkDelayTimes {
         for (int i = 1; i < N; i++) {
             for (int[] edge : times) {
                 if (dist[edge[0]] != Integer.MAX_VALUE ) {
-                    dist[edge[1]] = Math.min(dist[edge[1]], dist[edge[0]] + edge[2]);
+                    dist[edge[1]] = Math.min(dist[edge[1]], dist[edge[0]] + edge[2]); // relaxation
                 }
             }
         }
