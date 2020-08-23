@@ -9,7 +9,7 @@ public class SearchInRotatedSortedArrayII {
     #154 find minimum in rotated sorted array (with duplicates)
      */
 
-    // #33 search in rotated sorted array (no duplicates)
+        // #33 search in rotated sorted array (no duplicates)
     public int search(int[] nums, int target) {
         int n = nums.length, lo = 0, hi = n - 1;
 

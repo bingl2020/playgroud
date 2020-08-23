@@ -1,4 +1,4 @@
-package bucketSort;
+package Sorting;
 
 import java.util.*;
 

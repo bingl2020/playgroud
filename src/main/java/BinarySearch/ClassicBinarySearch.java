@@ -2,6 +2,7 @@ package BinarySearch;
 
 public class ClassicBinarySearch {
 
+
     public int binarySearchIterative(int[] arr, int x) {
         int left = 0, right = arr.length - 1;
 
@@ -9,7 +10,7 @@ public class ClassicBinarySearch {
             int mid = left + (right - left) / 2;
             if (arr[mid] == x) {
                 return mid;
-            } else if (arr[mid] > x){
+            } else if (arr[mid] > x) {
                 right = mid - 1;
             } else {
                 left = mid + 1;

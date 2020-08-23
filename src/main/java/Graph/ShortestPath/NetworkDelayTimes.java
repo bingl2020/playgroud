@@ -127,22 +127,77 @@ public class NetworkDelayTimes {
         return adj;
     }
 
+    public int networkDelayTime(int[][] times, int N, int K) {
+        Map<Integer, List<int[]>> adj = buildAjacencyList(times, N);
+        // dijkstra's algorithm
+        Set<Integer> visited = new HashSet<>();
+        int[] travelTime = new int[N + 1];
+        Arrays.fill(travelTime, Integer.MAX_VALUE);
+        travelTime[K] = 0;
+        // int[] 0 -> node, 1 -> travelTime
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+        minHeap.offer(new int[] {K, travelTime[K]});
+
+        while (!minHeap.isEmpty()) {
+            int[] node = minHeap.poll();
+
+            if (visited.contains(node[0])) {
+                continue;
+            }
+
+            visited.add(node[0]);
+
+            if (adj.containsKey(node[0])) {
+                for (int[] edge : adj.get(node[0])) {
+                    if (!visited.contains(edge[1])
+                            && travelTime[node[0]] + edge[2] < travelTime[edge[1]] ) {
+                        travelTime[edge[1]] = node[1] + edge[2];
+                        minHeap.offer(new int[]{edge[1], travelTime[edge[1]]});
+                    }
+                }
+            }
+        }
+
+        int max = 0;
+        for (int i = 1; i <= N; i++) {
+            if (travelTime[i] == Integer.MAX_VALUE) { // unreachable
+                return -1;
+            }
+            max = Math.max(max, travelTime[i]);
+        }
+
+        return max;
+    }
+
+    private Map<Integer, List<int[]>> buildAjacencyList(int[][] times, int N) {
+        Map<Integer, List<int[]>> adj = new HashMap<>();
+
+        for (int[] edge : times) {
+            adj.putIfAbsent(edge[0], new ArrayList<>());
+            adj.get(edge[0]).add(edge);
+        }
+
+        return adj;
+    }
+
     public static void main(String[] args) {
-//        int[][] times = {{2, 1, 1}, {2, 3, 1}, {3, 4, 1}};
-        int[][] times = {
-                {1, 3, 4},
-                {1, 2, 2},
-                {2, 4, 7},
-                {2, 3, 1},
-                {3, 5, 3},
-                {4, 6, 1},
-                {5, 4, 2},
-                {5, 6, 5}};
+        int[][] times = {{2, 1, 1}, {2, 3, 1}, {3, 4, 1}};
+//        int[][] times = {
+//                {1, 3, 4},
+//                {1, 2, 2},
+//                {2, 4, 7},
+//                {2, 3, 1},
+//                {3, 5, 3},
+//                {4, 6, 1},
+//                {5, 4, 2},
+//                {5, 6, 5}};
 
         NetworkDelayTimes test = new NetworkDelayTimes();
 
 
-        test.networkDelayTime_dijkstra(times, 6, 2);
+        test.networkDelayTime_dijkstra(times, 4, 2);
+
+        test.networkDelayTime(times, 4, 2);
 
     }
 }

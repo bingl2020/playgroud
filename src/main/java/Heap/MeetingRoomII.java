@@ -1,3 +1,5 @@
+package Heap;
+
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
@@ -9,6 +11,7 @@ find the minimum number of rooms required to hold all the meetings.
 
 /*  Thought Process
 We need to allocate a different meeting room, if a meeting is clashing with the previous meeting.
+if current meeting's start time is equal or greater than the previours meeting's end time. reuse the
 
 1. sort all the meeting on the basis of the start time
 2. use minHeap to track the end timing

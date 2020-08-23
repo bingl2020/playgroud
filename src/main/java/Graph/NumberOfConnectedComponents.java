@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //323 Number of Connected Components in an Undirected Graph
+//https://protegejj.gitbook.io/algorithm-practice/leetcode/union-find/323-number-of-connected-components-in-an-undirected-graph
 /*
 1. Question
 Givennnodes labeled from0ton - 1and a list of undirected edges (each edge is a pair of nodes), write a function to find the number of connected components in an undirected graph.
