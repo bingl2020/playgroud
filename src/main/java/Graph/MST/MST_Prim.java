@@ -3,6 +3,7 @@ package Graph.MST;
 // The program is for adjacency matrix representation of the graph
 
 class MST_Prim {
+
     // Number of vertices in the graph
     private static final int V = 5;
 

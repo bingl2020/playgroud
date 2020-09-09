@@ -17,17 +17,17 @@ public class CourseSchedule {
 
         Deque<Integer> queue = new ArrayDeque<>();
         for (int course = 0; course < numCourses; course++) {
-            if (indegree[course] == 0) {
+            if (indegree[course] == 0) {    // put indegree node to queue
                 queue.offer(course);
             }
         }
 
         int count = 0;
-        while (!queue.isEmpty()) {
+        while (!queue.isEmpty()) {  //bfs
             int course = queue.poll();
 
             for (int neighbor : adj[course]) {
-                indegree[neighbor]--;
+                indegree[neighbor]--; // reduce indegree
                 if (indegree[neighbor] == 0) {
                     queue.offer(neighbor);
                 }

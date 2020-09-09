@@ -1,14 +1,16 @@
 package Tree;
 /*
 inorder predecessor: is node with maximum value in its left subtree,(right-most child)
-    if its left subtree doesn't exist, predecessor is one of the ancestors, which is the node where we take last right turn.
+    if its left subtree doesn't exist, predecessor is one of the ancestors,
+        which is the node where we take last right turn.
 inorder successor: is the node with minimum value in its right subtree (left-most child)
-    if its right subtree doesn't exist, successor is one of the ancestors, which is the node where we take last left turn.
+    if its right subtree doesn't exist, successor is one of the ancestors,
+        which is the node where we take last left turn.
 
 
 
  */
-public class BinarySearchTree {
+public class BST_Predecessor_Successor {
     Node root;
 
     Node findInorderPredecessor(Node node, int key) {
@@ -125,7 +127,7 @@ public class BinarySearchTree {
     }
 
     public static void main(String[] args) {
-        BinarySearchTree tree = new BinarySearchTree();
+        BST_Predecessor_Successor tree = new BST_Predecessor_Successor();
         int[] keys = { 15, 10, 20, 8, 12, 16, 25 };
 
         for (int key : keys) {

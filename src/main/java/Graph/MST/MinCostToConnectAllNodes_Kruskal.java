@@ -3,7 +3,7 @@ package Graph.MST;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
+//https://leetcode.com/discuss/interview-question/356981/amazon-oa-2019-min-cost-to-connect-all-nodes
 /*
 Prim's Algorithm
 1. Randomly choose a vertex, 2. choose the shortest/cheapest edge from this vertex 3. choose the nearest/cheapest vertex not yet in the solution
@@ -35,7 +35,7 @@ public class MinCostToConnectAllNodes_Kruskal {
         for(int[] edge: edges) {
             int[] e = new int[]{edge[0], edge[1]};
             int hash = Arrays.hashCode(e);
-            if(set.contains(hash)) {
+            if(set.contains(hash)) { // broken edge to be repaired
                 continue;
             }
             if(find(edge[0]) != find(edge[1])) {

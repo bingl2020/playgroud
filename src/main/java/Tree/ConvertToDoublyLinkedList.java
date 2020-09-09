@@ -1,36 +1,36 @@
 package Tree;
-
+//https://www.geeksforgeeks.org/convert-given-binary-tree-doubly-linked-list-set-3/
 public class ConvertToDoublyLinkedList {
 
-    class Context {
+    class PrevNodeWrapper {
         Node head;
         Node prev;
     }
 
     public Node convertBinaryTreeToDDL(Node root) {
-        Context context = new Context();
+        PrevNodeWrapper prevNodeWrapper = new PrevNodeWrapper();
 
-        convertBinaryTreeToDDLRec(root, context);
+        convertBinaryTreeToDDLRec(root, prevNodeWrapper);
 
-        return context.head;
+        return prevNodeWrapper.head;
     }
 
-    public void convertBinaryTreeToDDLRec(Node root, Context context) {
+    public void convertBinaryTreeToDDLRec(Node root, PrevNodeWrapper prevNodeWrapper) {
         if (root == null) {
             return;
         }
-        convertBinaryTreeToDDLRec(root.left, context);
+        convertBinaryTreeToDDLRec(root.left, prevNodeWrapper);
 
         // process
-        if (context.prev == null) {
-            context.head = root;
+        if (prevNodeWrapper.prev == null) {
+            prevNodeWrapper.head = root;
         } else {
-            context.prev.right = root;
+            prevNodeWrapper.prev.right = root;
         }
-        root.left = context.prev;
-        context.prev = root;
+        root.left = prevNodeWrapper.prev;
+        prevNodeWrapper.prev = root;
 
-        convertBinaryTreeToDDLRec(root.right, context);
+        convertBinaryTreeToDDLRec(root.right, prevNodeWrapper);
     }
 
     public static void main(String[] args) {

@@ -14,7 +14,7 @@ public class MinimumHeightTrees {
 
         List<Integer>[] adj = buildAjacencyList(n, edges);
         int[] pre = new int[n];
-
+// find longest path.
         int u = bfs(n, adj, pre, 0);
         int v = bfs(n, adj, pre, u);
 

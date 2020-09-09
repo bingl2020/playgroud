@@ -3,9 +3,16 @@ package Tree;
 import java.util.Arrays;
 
 /*
- 1 2 3 4 5 6
- 2 3 4 5 6
+Thought Process:
+This is an optimal question. Seems like we need to try to build all the possible bst, and find the best one.
+So, any value can be root. Based on bst property, if we pick up an element,
+then the emlements on the left side, are smaller, so they are left subtree nodes.
+likewise,
+then
+ */
 
+/*
+https://www.geeksforgeeks.org/optimal-binary-search-tree-dp-24/
  */
 public class OptimalSearchTree {
 

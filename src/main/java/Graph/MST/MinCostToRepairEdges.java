@@ -7,6 +7,20 @@ import java.util.Map;
 /*
 https://leetcode.com/discuss/interview-question/357310
  */
+
+/*
+Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph.
+This mean it finds a subset of the edges that forms a tree that includes every vertex, where the total weight
+of all the edges in the tree is minimized. Thre algorithm operates by building this tree one vertex at a time,
+form an arbitrary starting vertex, at each step adding the cheapest possible connection from the tree to another vertex.
+
+the idea to maintain two sets of vertices. Thre first set contains the vertices already included in the MST, the other set contains the vertices not yet included.
+At every step, it considers all the edges tht connect the two sets, and pick the minimum weight edge from these edges.
+After picking the edge, it moves the other endpoint of the edge to the set containing MST.
+
+The idea behind Prim's algorithm is simple, a spanning tree means all vertices must ve connected. So the two disjoint subsets of vertices must be connected to make a
+spanning tree.
+ */
 public class MinCostToRepairEdges {
     public static void main(String[] args) {
 
@@ -27,15 +41,21 @@ public class MinCostToRepairEdges {
     private static int minCost_prims(int n, int[][] edges, int[][] newEdges) {
         String to = "->";
         int res = 0;
+
         Map<String, Integer> graph = new HashMap<>();
+        //MST
+        //adjacency List
         for (int[] edge : edges) {
             graph.put(edge[0] + to + edge[1], 0);
             graph.put(edge[1] + to + edge[0], 0);
         }
+
+
         for (int[] edge : newEdges) {
             graph.put(edge[0] + to + edge[1], edge[2]);
             graph.put(edge[1] + to + edge[0], edge[2]);
         }
+
         int[] dist = new int[n + 1];
         boolean[] visited = new boolean[n + 1];
         Arrays.fill(dist, Integer.MAX_VALUE);

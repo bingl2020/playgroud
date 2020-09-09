@@ -5,31 +5,6 @@ import java.util.*;
 
 public class BinaryTree {
 
-    public List<Integer> inorderTraversal2(TreeNode root) {
-        List<Integer> res = new ArrayList<>();
-
-        Deque<TreeNode> stack = new ArrayDeque<>();
-
-        TreeNode curr = root;
-        while (curr != null || !stack.isEmpty()) {
-            if (curr != null) {
-                stack.push(curr);
-                curr = curr.left;
-            }
-
-            curr = stack.peek().right;
-
-            if (curr == null) {
-                curr = stack.pop();
-                res.add(curr.val);
-            } else {
-                curr = curr.right;
-            }
-        }
-
-        return res;
-    }
-
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
 
