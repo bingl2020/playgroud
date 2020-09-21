@@ -14,16 +14,16 @@ import java.util.List;
 public class LowestCommonAncestorOfDeepestLeaves {
 
     public TreeNode lcaDeepestLeaves(TreeNode root) {
-        return helper(root, 0).node;
+        return lcaDeepestLeaves(root, 0).node;
     }
 
-    public Result helper(TreeNode root, int depth) {
+    public Result lcaDeepestLeaves(TreeNode root, int depth) {
         if (root == null) {
-            return new Result(null, -1);
+            return new Result(null, depth);
         }
 
-        Result left = helper(root.left, depth + 1);
-        Result right = helper(root.right, depth + 1);
+        Result left = lcaDeepestLeaves(root.left, depth + 1);
+        Result right = lcaDeepestLeaves(root.right, depth + 1);
 
         if (left.depth > right.depth) {
             return new Result(left.node, left.depth);
@@ -31,7 +31,7 @@ public class LowestCommonAncestorOfDeepestLeaves {
             return new Result(right.node, right.depth);
         }
 
-        return new Result(root, depth);
+        return new Result(root, left.depth);
     }
 
     public static void main(String[] args) {
